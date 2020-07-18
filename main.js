@@ -8,6 +8,16 @@ var done = false;
 
 const fs = require('fs');
 
+client.commands = new Discord.Collection();
+
+const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
+for(const file of commandFiles) 
+{
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.name, command);
+}
+
+
 client.once('ready', () => {
     console.log('The bot is online!');
 });
@@ -19,107 +29,49 @@ client.on('message', async message => {
 
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
-
-	if (command === 'hihowareyou' && message.member.voice.channel) {
-    const connection = await message.member.voice.channel.join();
-    
-    const dispatcher = connection.play(fs.createReadStream('hihowareyou.MP3'));
-    dispatcher.on('error',console.error);
-    
-    dispatcher.on('finish', () => {
-      done = true;
-      if (done)
-      {
-        done = false;
-        connection.disconnect();
-      }
-    });
-  }
-  else 
+  //********************************************************************* */
+  // help command here
+  if (command === 'help')
   {
-    console.log("join the voice channel");
+    client.commands.get('help').execute(message,args);
   }
-  if (command === 'sadsong') {
-    const connection = await message.member.voice.channel.join();
-    
-    const dispatcher = connection.play(fs.createReadStream('sadsong.MP3'));
-    dispatcher.on('error',console.error);
-    
-    dispatcher.on('finish', () => {
-      done = true;
-      if (done)
-      {
-        done = false;
-        connection.disconnect();
-      }
-    });
+  //********************************************************************* */
+  // hi how are you command here
+  else if (command === 'hihowareyou' && message.member.voice.channel)
+  {
+    client.commands.get('hihowareyou').execute(message,args);
   }
-  if (command === 'pinhead') {
-    const connection = await message.member.voice.channel.join();
-    
-    const dispatcher = connection.play(fs.createReadStream('pinhead.MP3'));
-    dispatcher.on('error',console.error);
-    
-    dispatcher.on('finish', () => {
-      done = true;
-      if (done)
-      {
-        done = false;
-        connection.disconnect();
-      }
-    });
+  //********************************************************************* */
+  // sad song command
+  else if (command === 'sadsong' && message.member.voice.channel)
+  {
+    client.commands.get('sadsong').execute(message,args);
   }
-  if (command === 'patricklaugh') {
-    const connection = await message.member.voice.channel.join();
-    
-    const dispatcher = connection.play(fs.createReadStream('patricklaugh.MP3'));
-    dispatcher.on('error',console.error);
-    
-    dispatcher.on('finish', () => {
-      done = true;
-      if (done)
-      {
-        done = false;
-        connection.disconnect();
-      }
-    });
+  //********************************************************************* */
+  // pinhead command
+  else if (command === 'pinhead' && message.member.voice.channel)
+  {
+    client.commands.get('pinhead').execute(message,args);
   }
-  if (command === 'patricksnore') {
-    const connection = await message.member.voice.channel.join();
-    
-    const dispatcher = connection.play(fs.createReadStream('patricksnore.MP3'));
-    dispatcher.on('error',console.error);
-    
-    dispatcher.on('finish', () => {
-      done = true;
-      if (done)
-      {
-        done = false;
-        connection.disconnect();
-      }
-    });
+  //********************************************************************* */
+  // patricklaugh command
+  else if (command === 'patricklaugh' && message.member.voice.channel)
+  {
+    client.commands.get('patricklaugh').execute(message,args);
+  }
+  //********************************************************************* */
+  // patricksnore command
+  else if (command === 'patricksnore' && message.member.voice.channel)
+  {
+    client.commands.get('patricksnore').execute(message,args);
+  }
+  //********************************************************************* */
+  // if user is not in a voice channel the bot will say message the server saying to enter a voice channel
+  else
+  {
+    message.channel.send('please enter a voice channel');
   }
 });
 
-// client.on('message', message => {
-//     if(!message.content.startsWith(prefix) || message.author.bot) return;
-
-//     const args = message.content.slice(prefix.length).split(/ +/);
-//     const command = args.shift().toLowerCase();
-
-//     if (command === 'go')
-//     {
-//         var voiceChannel = message.member.voiceChannel;
-//         await voiceChannel.join().then(connection =>
-//     {
-//           const dispatcher = connection.playFile('C:\Users\MightyMango\Desktop\MangoBot\HiHowareyou.MP3');
-//           dispatcher.on("end", end => {
-//           voiceChannel.leave();
-//          });
-//      }).catch(err => console.log(err));
-     
-//     }
-//   });
-
-
 // insert client.login('bot token here');
+
