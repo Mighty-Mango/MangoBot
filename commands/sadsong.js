@@ -7,9 +7,9 @@ module.exports =
         async function play(voiceChannel) 
         {
             var done = false;
-            const fs = require('fs');
+            //const fs = require('fs');
             const connection = await message.member.voice.channel.join();
-            const dispatcher = connection.play(fs.createReadStream('sadsong.MP3'));
+            const dispatcher = connection.play('C:/Users/MightyMango/Desktop/MangoBot/audioclips/mp3clips/sadsong.MP3');
             dispatcher.on('error',console.error);
         
             dispatcher.on('finish', () => {

@@ -9,7 +9,7 @@ module.exports =
             var done = false;
             const fs = require('fs');
             const connection = await message.member.voice.channel.join();
-            const dispatcher = connection.play(fs.createReadStream('patricksnore.MP3'));
+            const dispatcher = connection.play(fs.createReadStream('C:/Users/MightyMango/Desktop/MangoBot/audioclips/mp3clips/patricksnore.MP3'));
             dispatcher.on('error',console.error);
         
             dispatcher.on('finish', () => {

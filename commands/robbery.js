@@ -1,7 +1,7 @@
 module.exports = 
 {
-    name: 'patricklaugh',
-    description: "patricklaugh command",
+    name: 'robbery',
+    description: "robbery command",
     execute(message, args)
     {
         async function play(voiceChannel) 
@@ -9,7 +9,7 @@ module.exports =
             var done = false;
             const fs = require('fs');
             const connection = await message.member.voice.channel.join();
-            const dispatcher = connection.play(fs.createReadStream('C:/Users/MightyMango/Desktop/MangoBot/audioclips/mp3clips/patricklaugh.MP3'));
+            const dispatcher = connection.play(fs.createReadStream('C:/Users/MightyMango/Desktop/MangoBot/audioclips/mp3clips/robbery.MP3'));
             dispatcher.on('error',console.error);
         
             dispatcher.on('finish', () => {
@@ -22,5 +22,6 @@ module.exports =
             });
         }
         play(message);
+
     }
 }
