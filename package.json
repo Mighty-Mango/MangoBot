@@ -9,7 +9,16 @@
   "author": "Daniel Park",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.2.0",
+    "@discordjs/opus": "^0.6.0",
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "@discordjs/voice": "^0.6.0",
+    "discord-api-types": "^0.24.0",
+    "discord-speech-recognition": "^2.1.0",
+    "discord-tts": "^1.2.1",
+    "discord.js": "^13.2.0",
+    "dotenv": "^10.0.0",
+    "ffmpeg": "0.0.4",
+    "libsodium-wrappers": "^0.7.9",
     "opusscript": "0.0.7"
   }
 }
