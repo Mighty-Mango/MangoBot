@@ -3,8 +3,8 @@ const { AudioPlayerStatus, createAudioPlayer,createAudioResource, AudioResource,
 const player = createAudioPlayer();
 module.exports = 
 {
-    name: 'heheboi',
-    description: "heheboi command",
+    name: 'ohno',
+    description: "ohno command",
     execute(message, args)
     {
         async function play(voiceChannel) 
@@ -19,8 +19,8 @@ module.exports =
                 selfDeaf: false,
             });
         
-            connection.subscribe(player);
-            const resource = createAudioResource('C:/Users/Daniel Park/Desktop/MangoBot/audioclips/mp3clips/heheboi.MP3');
+            connection.subscribe(player)
+            const resource = createAudioResource('C:/Users/Daniel Park/Desktop/MangoBot/audioclips/mp3clips/ohno.MP3');
             player.play(resource);
 
             player.on('error',console.error);

@@ -3,8 +3,8 @@ const { AudioPlayerStatus, createAudioPlayer,createAudioResource, AudioResource,
 const player = createAudioPlayer();
 module.exports = 
 {
-    name: 'heheboi',
-    description: "heheboi command",
+    name: 'cyalaternerds',
+    description: "cyalaternerds command",
     execute(message, args)
     {
         async function play(voiceChannel) 
@@ -20,7 +20,7 @@ module.exports =
             });
         
             connection.subscribe(player);
-            const resource = createAudioResource('C:/Users/Daniel Park/Desktop/MangoBot/audioclips/mp3clips/heheboi.MP3');
+            const resource = createAudioResource('C:/Users/Daniel Park/Desktop/MangoBot/audioclips/mp3clips/cyalaternerds.MP3');
             player.play(resource);
 
             player.on('error',console.error);

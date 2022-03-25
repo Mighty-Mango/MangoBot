@@ -1,3 +1,6 @@
+const { joinVoiceChannel } = require('@discordjs/voice');
+const { AudioPlayerStatus, createAudioPlayer,createAudioResource, AudioResource, StreamType } = require('@discordjs/voice');
+const player = createAudioPlayer();
 module.exports = 
 {
     name: 'sadsong',
@@ -7,20 +10,33 @@ module.exports =
         async function play(voiceChannel) 
         {
             var done = false;
-            //const fs = require('fs');
-            const connection = await message.member.voice.channel.join();
-            const dispatcher = connection.play('C:/Users/MightyMango/Desktop/MangoBot/audioclips/mp3clips/sadsong.MP3');
-            dispatcher.on('error',console.error);
+            const fs = require('fs');
+            const channel = message.member.voice.channel;
+            const connection = joinVoiceChannel({
+                channelId: channel.id,
+                guildId: channel.guild.id,
+                adapterCreator: channel.guild.voiceAdapterCreator,
+                selfDeaf: false,
+            });
         
-            dispatcher.on('finish', () => {
+            connection.subscribe(player);
+            const resource = createAudioResource('C:/Users/Daniel Park/Desktop/MangoBot/audioclips/mp3clips/sadsong.MP3');
+            player.play(resource);
+
+            player.on('error',console.error);
+        
+            player.on('finish', () => {
             done = true;
             if (done)
             {
                 done = false;
-                connection.disconnect();
+                setTimeout(function(){
+                    connection.disconnect();
+                }, 100000)
             }
             });
         }
         play(message);
+
     }
 }
